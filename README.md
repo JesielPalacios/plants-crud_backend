@@ -1,104 +1,104 @@
-# hackathon-unac-backend
+# plants-crud backend - API REST FULL
 
-Bienvenid, este es el proyecto backend donde está la API Rest Full de la Hakathon en la Corporación Universitaria Adventista - UNAC
+Welcome, this is the backend project where the Rest Full API from the plants-crud frontend project is. It runs in the lime and you can put a bd in the cloud if you want.
 
-## Información relevante
-Esta es una API Rest Full desarrollada con con al versión estable de Node.js #14
+## Relevant information
+This is a Rest Full API developed with the latest stable version of Node.js
 
-* Desarrollado con Nodejs
-* Desarrollado con Express.js
-* Desarrollado con patrón MVC
+* Developed with Nodejs
+* Developed with Express.js
+* Developed with MVC pattern
 
 
-## Descargar el repositorio
-A continuación los pasos para la instalación de las dependencias con `git`
+## Download the repository
+Here are the steps to install the dependencies with `git`
 
-* Para descargar el repositorio en una carpeta con el mismo nombre del repositorio  
+* To download the repository in a folder with the same name as the repository
 
 ```markdown
 git clone https://github.com/JesielPalacios/hackathon-unac-backend
 ```
 
-* Para descargar el repositorio en una carpeta actual  
+* To download the repository to a current folder
 
 ```markdown
 git clone https://github.com/JesielPalacios/hackathon-unac-backend .
 ```
 
-* Para descargar una rama específica del repositorio
+* To download a specific branch of the repository
 
 ```markdown
-git clone https://github.com/JesielPalacios/hackathon-unac-backend -b <nombredeLaRama>
+git clone https://github.com/JesielPalacios/hackathon-unac-backend -b <branchname>
 ```
 
-* Para descargar una rama específica del repositorio en una carpeta actual  
+* To download a specific repository branch to a current folder
 
 ```markdown
-git clone https://github.com/JesielPalacios/hackathon-unac-backend -b <nombredeLaRama> .
+git clone https://github.com/JesielPalacios/hackathon-unac-backend -b <branchname> .
 ```
 
 
-## Instalación de dependencias
-* Para instalar todas las dependencias de nuestro proyecto debemos  ejecutar el siguiente comando: `npm i`
+## Install dependencies
+* To install all the dependencies of our project we must execute the following command: `npm i`
 
 ```markdown
 npm i
 ```
 
-ó también puede utiliza el comando referente:
+or you can also use the referrer command:
 
 ```markdown
 npm install
 ```
 
-Y con esto ya habrás instalado todas las dependencias de nuetro proyecto y estarás listo para empeazar  ausarlo o modificarlo.
+And with this you will have installed all the dependencies of our project and you will be ready to start using or modifying it.
 
-* Para instalar una nueva dependencia: `npm i <nombreDeLaDependencia>`
-
-```markdown
-npm i <nombreDeLaDependencia>
-```
-
-ó también puede utiliza el comando referente:
+* To install a new dependency: `npm i <dependencyName>`
 
 ```markdown
-npm install <nombreDeLaDependencia>
+npm i <DependencyName>
 ```
 
-* Para instalar una nueva dependencia con una versión en específico: `npm i <nombreDeLaDependencia>@versión`
+or you can also use the referrer command:
 
 ```markdown
-npm i <nombreDeLaDependencia>@versión
+npm install <dependencyname>
 ```
 
-ó también puede utiliza el comando referente:
+* To install a new dependency with a specific version: `npm i <dependencyname>@version`
 
 ```markdown
-npm install <nombreDeLaDependencia>@versión
+npm i <DependencyName>@version
+```
+
+or you can also use the referrer command:
+
+```markdown
+npm install <dependencyname>@version
 ```
 
 
 
-## Iniciar el servidor
-* Para iniciar el servidor en modo de desarrollo se hace con el comando: `npm run dev`, por defecto el puerto de desarrollo es `3001` pero se le puede pasar una variable de entorno llamada `PORT` en la que se puede configurar el puerto indicando el número deseado:
+## Start the server
+* To start the server in development mode it is done with the command: `npm run dev`, by default the development port is `3001` but you can pass an environment variable called `PORT` in which it can be configured the port indicating the desired number:
 
 ```markdown
 npm run dev
 ```
 
-Agregando una variable de entorno (también puede agregar una variable de entorno en el archivo `.env` sin necesidad de pasarla a cada rato por la terminal o la consola)
+Adding an environment variable (you can also add an environment variable in the `.env` file without needing to pass it every now and then to the terminal or console)
 
 ```markdown
-PORT=<númeroDePuertoDeseado> npm run dev
+PORT=<DesiredPortNumber> npm run dev
 ```
 
-* Para iniciar el servidor en modo de producción se hace con el comando: `npm start`
+* To start the server in production mode it is done with the command: `npm start`
 
 ```markdown
 npm start
 ```
 
-ó también puede utiliza el comando referente:
+or you can also use the referrer command:
 
 ```markdown
 npm run start
@@ -106,8 +106,8 @@ npm run start
 
 
 
-## Correr pruebas
-* Para correr las diferentes pruebas del proyecto: `npm run tests`
+## Run tests
+* To run the different tests of the project: `npm run tests`
 
 ```markdown
 npm run tests
@@ -115,5 +115,5 @@ npm run tests
 
 
 
-## Contacto
-Esto ha sido todo por ahora, muchas gracias por tu interés en este proyecto, si necesitas alguna información adicional, soporte, reporte de errores, pull requests (PRs), donarme un cafesito puedes contactarme al correo: jesielvirtualsa@gmail.com
+## Contact
+This has been all for now, thank you very much for your interest in this project, if you need any additional information, support, bug reports, pull requests (PRs), donate a coffee to me, you can contact me at: jesielvirtualsa@gmail.com
