@@ -13,7 +13,7 @@ export const createPlants = async () => {
         name: 'Aloe vera',
         discoveredAt: '2019-03-02',
         benefits:
-          'ALOE VERA: PIEL RADIANTE De la familia de las Asphodelaceae, pertenece al género Aloe, que cuenta con más de 350 especies vegetales. El aloe vera, muy habitual entre las plantas de interior, es una planta medicinal que tiene infinidad de aplicaciones en diversos remedios naturales, especialmente para los de la piel. Entre ellas, la de aliviar las quemaduras, rozaduras e, incluso, psoriasis y picaduras de insectos. Además, regenera y mantiene joven la piel gracias a su gran cantidad de agua, que da oxígeno a las células epiteliales.',
+          'También coonocida como piel radiante, de la familia de las Asphodelaceae, pertenece al género Aloe, que cuenta con más de 350 especies vegetales. El aloe vera, muy habitual entre las plantas de interior, es una planta medicinal que tiene infinidad de aplicaciones en diversos remedios naturales, especialmente para los de la piel. Entre ellas, la de aliviar las quemaduras, rozaduras e, incluso, psoriasis y picaduras de insectos. Además, regenera y mantiene joven la piel gracias a su gran cantidad de agua, que da oxígeno a las células epiteliales.',
         discoveredAt: '2019-03-02',
         medicinal: 'Yes',
         flower: 'Yes',
@@ -37,10 +37,10 @@ export const createPlants = async () => {
         name: 'Valeriana',
         discoveredAt: '2019-03-02',
         benefits:
-          'VALERIANA: REDUCE EL ESTRÉS La valeriana o Valeriana officinalis es una de las plantas medicinales más empleadas en la fitoterapia. Y es normal, ya que tiene infinidad de beneficios pero quizás el más conocido sea el ayudar a relajarnos. La valeriana es una planta que disminuye la ansiedad y ayuda a dormir. Pero además, es buena para las diarreas, para reducir temblores leves, para aliviar el dolor de cabeza y el de la menstruación.',
+          'Reduce el extrés, la valeriana o Valeriana officinalis es una de las plantas medicinales más empleadas en la fitoterapia. Y es normal, ya que tiene infinidad de beneficios pero quizás el más conocido sea el ayudar a relajarnos. La valeriana es una planta que disminuye la ansiedad y ayuda a dormir. Pero además, es buena para las diarreas, para reducir temblores leves, para aliviar el dolor de cabeza y el de la menstruación.',
         discoveredAt: '2019-03-02',
         medicinal: 'Yes',
-        flower: "Yes",
+        flower: 'Yes',
         maximumHeight: 18.2,
         model: 'Medicinal',
       })
@@ -61,10 +61,10 @@ export const createPlants = async () => {
         name: 'Alcachofa',
         discoveredAt: '2019-03-02',
         benefits:
-          'ALCACHOFA: ELIMINA GRASAS La alcachofa o Cynara scolymus es una planta medicina que, además, es muy habitual en nuestras recetas del día a día. Pues bien, esta planta tiene multitud de beneficios. Destaca su gran aporte de calcio y fósforo, así como otros minerales como hierro, potasio, magnesio y zinc. También su acción depurativa es muy conocida para ayudar a adelgazar, perder grasa y regular el colesterol.',
+          'Elimina grasas, la alcachofa o Cynara scolymus es una planta medicina que, además, es muy habitual en nuestras recetas del día a día. Pues bien, esta planta tiene multitud de beneficios. Destaca su gran aporte de calcio y fósforo, así como otros minerales como hierro, potasio, magnesio y zinc. También su acción depurativa es muy conocida para ayudar a adelgazar, perder grasa y regular el colesterol.',
         discoveredAt: '2019-03-02',
-        medicinal: 'Not',
-        flower: 'Not',
+        medicinal: 'No',
+        flower: 'No',
         maximumHeight: 18.2,
         model: 'Medicinal',
       })
@@ -85,10 +85,10 @@ export const createPlants = async () => {
         name: 'Amapola',
         discoveredAt: '2019-03-02',
         benefits:
-          'AMAPOLA: PREVIENE AFECCIONES EN LA PIEL La amapola o Papaver rhoeas L., es una planta medicinal con propiedades curativas de la que se usan las semillas. Con estas semillas se consigue prevenir enfermedades cardiovasculares, anemias o afecciones de la piel. Su consumo es bien simple: solo tienes que añadirlas por ejemplo a las meriendas en un yogur o batido.',
+          'Previene de infecciones en la piel, la amapola o Papaver rhoeas L., es una planta medicinal con propiedades curativas de la que se usan las semillas. Con estas semillas se consigue prevenir enfermedades cardiovasculares, anemias o afecciones de la piel. Su consumo es bien simple: solo tienes que añadirlas por ejemplo a las meriendas en un yogur o batido.',
         discoveredAt: '2019-03-02',
         medicinal: 'Yes',
-        flower: 'Not',
+        flower: 'No',
         maximumHeight: 18.2,
         model: 'Medicinal',
       })
@@ -109,9 +109,9 @@ export const createPlants = async () => {
         name: 'Eucalipto',
         discoveredAt: '2019-03-02',
         benefits:
-          'EUCALIPTO: ALIVIA LOS SÍNTOMAS DEL RESFRIADO El eucalipto o eucaliptas es una de las plantas que más usamos para decorar la casa. Son plantas muy resistentes y perfectas para añadir a cualquier centro de mesa. Pero además de decorar el interior de nuestra casa, los eucaliptos son plantas medicinales muy beneficiosas para la salud. Entre sus propiedades más conocidas está la de aliviar los síntomas de los resfriados, en concreto afecciones respiratorias (tos, bronquitis, neumonía, asma...).',
+          'Alivia los síntomas del resfriado, el eucalipto o eucaliptas es una de las plantas que más usamos para decorar la casa. Son plantas muy resistentes y perfectas para añadir a cualquier centro de mesa. Pero además de decorar el interior de nuestra casa, los eucaliptos son plantas medicinales muy beneficiosas para la salud. Entre sus propiedades más conocidas está la de aliviar los síntomas de los resfriados, en concreto afecciones respiratorias (tos, bronquitis, neumonía, asma...).',
         discoveredAt: '2019-03-02',
-        medicinal: 'Not',
+        medicinal: 'No',
         flower: 'Yes',
         maximumHeight: 18.2,
         model: 'Medicinal',

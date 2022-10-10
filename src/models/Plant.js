@@ -25,13 +25,13 @@ const PlantSchema = new mongoose.Schema(
       type: String,
       required: true,
       default: 'Yes',
-      enum: ['Yes', 'Not'],
+      enum: ['Yes', 'No'],
     },
     flower: {
       type: String,
       required: true,
       default: 'Yes',
-      enum: ['Yes', 'Not'],
+      enum: ['Yes', 'No'],
     },
     maximumHeight: {
       type: Number,
@@ -43,8 +43,8 @@ const PlantSchema = new mongoose.Schema(
       default: 'Medicinal',
       enum: [
         'Medicinal',
-        'Edible (even raw).',
-        'Requires preparation to be edible.',
+        'Edible (even raw)',
+        'Requires preparation to be edible',
         'Poisonous',
         'Non eatable',
         'Ornament',

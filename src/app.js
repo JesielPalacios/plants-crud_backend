@@ -11,7 +11,7 @@ import { createPlants } from '../initialSetup'
 // Initializations
 const app = express()
 dotenv.config()
-createPlants()
+// createPlants()
 
 // Settings
 app.set('port', process.env.PORT || 3001)
