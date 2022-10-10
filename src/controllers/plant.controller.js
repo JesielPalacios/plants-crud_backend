@@ -7,14 +7,14 @@ import PlantSchema from '../models/Plant'
  * @param {Request} req - request objet.
  * @param {Response} res - response objet.
  */
-
 async function getAllPlants(req, res) {
   const query = req.query.new
 
   try {
     const plants = query ? await PlantSchema.find().sort({ _id: -1 }).limit(5) : await PlantSchema.find()
 
-    if (plants.length === 0) res.status(204).json({ message: "There aren't plants" })
+    // if (plants.length === 0) res.status(204).json({ message: "There aren't plants" })
+    if (plants.length === 0) res.status(204)
 
     res.status(200).json(plants)
   } catch (err) {
@@ -34,46 +34,49 @@ async function createNewPlant(req, res) {
     return res.status(400).json({ message: 'Some data is needed' })
   }
 
-  ;(await !PlantSchema.findOne({
+  const plantInStock = await PlantSchema.findOne({
     name: req.body.name,
-  })) && res.status(400).json({ message: 'Plant already exit' })
+  })
 
-  let newPlant
+  if (plantInStock) {
+    res.status(400).json({ message: 'Plant already exit' })
+  } else {
+    try {
+      let newPlant = new PlantSchema({ ...req.body })
+      // console.log(newPlant._id.toString().replace('new ObjectId(")').replace('")'))
 
-  try {
-    newPlant = new PlantSchema({ ...req.body })
+      if (req.files) {
+        if (req.files === null) {
+          return res.status(400).json({ message: 'No file uploaded' })
+        }
 
-    // console.log(newPlant._id.toString().replace('new ObjectId(")').replace('")'))
+        // const file = req.files.file
+        // file.name = uuid() + file.name
 
-    if (req.files) {
-      if (req.files === null) {
-        return res.status(400).json({ message: 'No file uploaded' })
+        // const newPhoto = new PhotoSchema({
+        //   imagePath: '/uploads/' + file.name,
+        //   photoSubject: req.body._id,
+        // })
+        // const savedPhoto = await newPhoto.save()
+
+        // newPlant = new PlantSchema({
+        //   ...req.body,
+        //   plantImage: savedPhoto._id,
+        // })
       }
 
-      // const file = req.files.file
-      // file.name = uuid() + file.name
-
-      // const newPhoto = new PhotoSchema({
-      //   imagePath: '/uploads/' + file.name,
-      //   photoSubject: req.body._id,
-      // })
-      // const savedPhoto = await newPhoto.save()
-
-      // newPlant = new PlantSchema({
-      //   ...req.body,
-      //   plantImage: savedPhoto._id,
-      // })
-    }
-
-    const savedPlant = await newPlant.save()
-    res.status(201).json(savedPlant)
-  } catch (err) {
-    if (err.code === 11000) {
-      console.log('err.code', err.code)
-      // res.status(400).send('Something went wrong')
-      res.status(400).json(err)
-    } else {
-      res.status(500).json(err)
+      const savedPlant = await newPlant.save()
+      res.status(201).json(savedPlant)
+    } catch (err) {
+      if (err.code === 11000) {
+        console.log('err.code', err.code)
+        // res.status(400).send('Something went wrong')
+        // res.status(400).json({ message: 'Plant already exit' })
+        res.status(400).json({ message: err })
+        // res.status(400)
+      } else {
+        res.status(500).json(err)
+      }
     }
   }
 }
