@@ -34,10 +34,15 @@ async function createNewPlant(req, res) {
     return res.status(400).json({ message: 'Some data is needed' })
   }
 
+  ;(await !PlantSchema.findOne({
+    name: req.body.name,
+  })) && res.status(400).json({ message: 'Plant already exit' })
+
   let newPlant
 
   try {
     newPlant = new PlantSchema({ ...req.body })
+
     // console.log(newPlant._id.toString().replace('new ObjectId(")').replace('")'))
 
     if (req.files) {
@@ -63,18 +68,6 @@ async function createNewPlant(req, res) {
     const savedPlant = await newPlant.save()
     res.status(201).json(savedPlant)
   } catch (err) {
-    // switch (err) {
-    //   case err.code === 11000:
-    //     console.log('err.code', err.code)
-    //     res.status(400).send('Something went wrong')
-    //     break
-
-    //     default:
-    //       // res.status(500).json({ err: err })
-    //       res.status(500)
-    //       break
-    //     }
-
     if (err.code === 11000) {
       console.log('err.code', err.code)
       // res.status(400).send('Something went wrong')
