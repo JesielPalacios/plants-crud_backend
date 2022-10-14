@@ -11,7 +11,7 @@ import { createPlants } from '../initialSetup'
 // Initializations
 const app = express()
 dotenv.config()
-// createPlants()
+    // createPlants()
 
 // Settings
 app.set('port', process.env.PORT || 3001)
@@ -51,7 +51,7 @@ app.use('/api', indexRoutes)
 
 // Not found route
 app.use((req, res) => {
-  res.status(404).json({ error: 'Not found' })
+    res.status(404).json({ error: 'Not found' })
 })
 
 export default app
