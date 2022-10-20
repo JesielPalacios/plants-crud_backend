@@ -1,17 +1,24 @@
-import mongoose from "mongoose"
+import mongoose from 'mongoose'
 
 const PhotoSchema = new mongoose.Schema(
   {
-    imagePath: String,
+    imagePath: {
+      type: String,
+      required: true
+    },
+    referenceId: {
+      type: String,
+      required: true
+    },
     photoSubject: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   {
     timestamps: true,
-    versionKey: false,
+    versionKey: false
   }
 )
 
-export default mongoose.model("Photo", PhotoSchema)
+export default mongoose.model('Photo', PhotoSchema)

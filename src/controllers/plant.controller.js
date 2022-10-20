@@ -1,7 +1,8 @@
 import { v4 as uuid } from 'uuid'
 import PlantSchema from '../models/Plant'
 import PhotoSchema from '../models/Photo'
-
+import fs from 'fs-extra'
+import path from 'path'
 /**
  * Controller for get all the plants from the database, got a sort method too.
  *
@@ -61,7 +62,9 @@ async function createNewPlant(req, res) {
       let newPlant = req.files
         ? new PlantSchema({
             ...req.body,
-            plantImage: photoId
+            plantImage: `/uploads/${req.files.plantPhoto.name
+              .split(' ')
+              .join('')}`
           })
         : new PlantSchema({ ...req.body })
 
@@ -74,8 +77,9 @@ async function createNewPlant(req, res) {
 
         console.log(file.name)
         const newPhoto = new PhotoSchema({
-          imagePath: '/uploads/' + file.name.trim(),
-          photoSubject: photoId
+          imagePath: '/uploads/' + file.name.split(' ').join(''),
+          photoSubject: newPlant._id.valueOf(),
+          referenceId: photoId
         })
         const savedPhoto = await newPhoto.save()
         // newPlant.plantImage = savedPhoto._id.valueOf()
@@ -138,6 +142,8 @@ async function getOnePlantById(req, res) {
  * @param {Response} res - response objet.
  */
 async function updateOnePlantById(req, res) {
+  let photoId = uuid()
+
   try {
     const updatedPlant = await PlantSchema.findByIdAndUpdate(
       req.params.id,
@@ -146,7 +152,43 @@ async function updateOnePlantById(req, res) {
       },
       { new: true }
     )
-    res.status(200).json(updatedPlant)
+
+    updatedPlant.plantImage = `/uploads/${req.files.plantPhoto.name}`
+
+    if (req.files) {
+      if (req.files === null) {
+        return res.status(400).json({ message: 'No file uploaded' })
+      }
+
+      const file = req.files.plantPhoto
+
+      console.log(file.name)
+      const newPhoto = new PhotoSchema({
+        imagePath: '/uploads/' + file.name.split(' ').join(''),
+        photoSubject: updatedPlant._id.valueOf(),
+        referenceId: photoId
+      })
+      const savedPhoto = await newPhoto.save()
+      // newPlant.plantImage = savedPhoto._id.valueOf()
+      // newPlant.plantImage = savedPhoto._id
+      // .valueOf()
+      // .toString()
+      // .replace('new ObjectId("')
+      // .replace('")')
+
+      file.mv(`./uploads/${file.name.split(' ').join('')}`, (err) => {
+        if (err) {
+          console.error(err)
+          return res.status(500).send(err)
+        }
+
+        // res.json({ fileName: file.name, filePath: `/uploads/${file.name}` })
+      })
+    }
+    const savedPlant = await updatedPlant.save()
+    res.status(201).json(savedPlant)
+
+    // res.status(200).json(updatedPlant)
   } catch (err) {
     res.status(500).json(err)
   }
@@ -162,6 +204,18 @@ async function updateOnePlantById(req, res) {
 async function deleteOnePlantById(req, res) {
   try {
     await PlantSchema.findByIdAndDelete(req.params.id)
+
+    // let photo = await PhotoSchema.deleteOne({ photoSubject: req.params.id })
+    // let photo = await PhotoSchema.findOneAndDelete({ photoSubject: req.params.id })
+    let photo = await PhotoSchema.findOneAndRemove({
+      photoSubject: req.params.id
+    })
+
+    await console.log('photo', photo)
+
+    if (photo) {
+      await fs.unlink(path.resolve('.' + photo.imagePath))
+    }
     res.status(200).json({ message: 'Plant has been deleted...' })
   } catch (err) {
     console.log(err)

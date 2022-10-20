@@ -1,6 +1,6 @@
-import PhotoSchema from "../models/Photo"
-import fs from "fs-extra"
-import path from "path"
+import PhotoSchema from '../models/Photo'
+import fs from 'fs-extra'
+import path from 'path'
 
 async function photos(req, res) {
   const photos = await PhotoSchema.find()
@@ -12,13 +12,13 @@ async function createPhoto(req, res) {
   const photo = new PhotoSchema(req.body)
   await photo.save()
   return res.json({
-    message: "Photo Saved Successfully",
-    photo,
+    message: 'Photo Saved Successfully',
+    photo
   })
 }
 
 async function photo(req, res) {
-  const photo = await PhotoSchema.findById({ id: req.params.id })
+  const photo = await PhotoSchema.findOne({ photoSubject: req.params.id })
   return res.json(photo)
 }
 
@@ -26,11 +26,11 @@ async function updatePhoto(req, res) {
   const { id } = req.params
   const updatedPhoto = await PhotoSchema.findByIdAndUpdate(id, {
     title,
-    description,
+    description
   })
   return res.json({
-    message: "Successfully updated",
-    updatedPhoto,
+    message: 'Successfully updated',
+    updatedPhoto
   })
 }
 
@@ -39,7 +39,7 @@ async function deletePhoto(req, res) {
   if (photo) {
     await fs.unlink(path.resolve(photo.imagePath))
   }
-  return res.json({ message: "Photo Deleted" })
+  return res.json({ message: 'Photo Deleted' })
 }
 
 export default {
@@ -47,5 +47,5 @@ export default {
   createPhoto,
   photo,
   updatePhoto,
-  deletePhoto,
+  deletePhoto
 }
