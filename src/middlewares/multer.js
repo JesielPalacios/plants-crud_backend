@@ -5,7 +5,7 @@ import { v4 as uuid } from "uuid"
 
 // Settings
 const storage = multer.diskStorage({
-  destination: "uploads",
+  destination: "/uploads",
   filename: (req, file, cb) => {
     cb(null, "img-" + uuid() + path.extname(file.originalname))
   },

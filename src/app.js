@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import compression from 'compression'
 import helmet from 'helmet'
+import path from 'path'
 import indexRoutes from './routes'
 import fileUpload from 'express-fileupload'
 import { createPlants } from '../initialSetup'
@@ -11,7 +12,7 @@ import { createPlants } from '../initialSetup'
 // Initializations
 const app = express()
 dotenv.config()
-    // createPlants()
+// createPlants()
 
 // Settings
 app.set('port', process.env.PORT || 3001)
@@ -29,7 +30,7 @@ app.use(fileUpload())
 app.use('/api', indexRoutes)
 
 // // this folders for this application will be used to store public file images
-// app.use('/uploads', express.static(path.resolve('uploads')))
+app.use('/uploads', express.static(path.resolve('uploads')))
 
 // // Upload Endpoint
 // app.post('/uploads', (req, res) => {
@@ -51,7 +52,7 @@ app.use('/api', indexRoutes)
 
 // Not found route
 app.use((req, res) => {
-    res.status(404).json({ error: 'Not found' })
+  res.status(404).json({ error: 'Not found' })
 })
 
 export default app

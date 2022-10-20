@@ -1,24 +1,22 @@
-import Router from "express"
-import plantCtrl from "../controllers/plant.controller"
-// import upload from "../middlewares/multer"
+import Router from 'express'
+import plantCtrl from '../controllers/plant.controller'
+import upload from '../middlewares/multer'
 
 let router
 router = Router(router)
 
 router
-  .route("/plants")
+  .route('/plants')
 
   // GET ALL PLANTS
   .get(plantCtrl.getAllPlants)
 
   // CREATE A PLANT
-  .post(
-    // upload.single('image'),
-    plantCtrl.createNewPlant
-  )
+  // .post(upload.single('image'), plantCtrl.createNewPlant)
+  .post(plantCtrl.createNewPlant)
 
 router
-  .route("/plant/:id")
+  .route('/plant/:id')
 
   // GET A PLANT BY ID
   .get(plantCtrl.getOnePlantById)

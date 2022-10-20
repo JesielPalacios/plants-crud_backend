@@ -11,7 +11,9 @@ async function getAllPlants(req, res) {
   const query = req.query.new
 
   try {
-    const plants = query ? await PlantSchema.find().sort({ _id: -1 }).limit(5) : await PlantSchema.find()
+    const plants = query
+      ? await PlantSchema.find().sort({ _id: -1 }).limit(5)
+      : await PlantSchema.find()
 
     // if (plants.length === 0) res.status(204).json({ message: "There aren't plants" })
     if (plants.length === 0) res.status(204)
@@ -30,53 +32,65 @@ async function getAllPlants(req, res) {
  * @param {Response} res - response objet.
  */
 async function createNewPlant(req, res) {
-  if (!(req.body.name || req.body.discoveredAt || req.body.benefits || req.body.medicinal || req.body.flower || req.body.maximumHeight || req.body.model)) {
+  if (
+    !(
+      req.body.name ||
+      req.body.discoveredAt ||
+      req.body.benefits ||
+      req.body.medicinal ||
+      req.body.flower ||
+      req.body.maximumHeight ||
+      req.body.model
+    )
+  ) {
     return res.status(400).json({ message: 'Some data is needed' })
   }
 
   const plantInStock = await PlantSchema.findOne({
-    name: req.body.name,
+    name: req.body.name
   })
 
   if (plantInStock) {
     res.status(400).json({ message: 'Plant already exit' })
   } else {
     try {
-      let newPlant = new PlantSchema({ ...req.body })
+      let newPlant
       // console.log(newPlant._id.toString().replace('new ObjectId(")').replace('")'))
 
       if (req.files) {
-        if (req.files === null) {
-          return res.status(400).json({ message: 'No file uploaded' })
-        }
+        // if (req.files === null) {
+        //   return res.status(400).json({ message: 'No file uploaded' })
+        // }
 
-        // const file = req.files.file
-        // file.name = uuid() + file.name
+        const file = req.files.plantPhoto
 
-        // const newPhoto = new PhotoSchema({
-        //   imagePath: '/uploads/' + file.name,
-        //   photoSubject: req.body._id,
-        // })
-        // const savedPhoto = await newPhoto.save()
+        const newPhoto = new PhotoSchema({
+          imagePath: '/uploads/' + file.name.trim(),
+          photoSubject: req.body._id
+        })
+        const savedPhoto = await newPhoto.save()
 
-        // newPlant = new PlantSchema({
-        //   ...req.body,
-        //   plantImage: savedPhoto._id,
-        // })
+        newPlant = new PlantSchema({
+          ...req.body,
+          plantImage: savedPhoto._id
+        })
+      } else {
+        newPlant = new PlantSchema({ ...req.body })
       }
 
       const savedPlant = await newPlant.save()
       res.status(201).json(savedPlant)
     } catch (err) {
-      if (err.code === 11000) {
-        console.log('err.code', err.code)
-        // res.status(400).send('Something went wrong')
-        // res.status(400).json({ message: 'Plant already exit' })
-        res.status(400).json({ message: err })
-        // res.status(400)
-      } else {
-        res.status(500).json(err)
-      }
+      // if (err.code === 11000) {
+      //   console.log('err.code', err.code)
+      //   // res.status(400).send('Something went wrong')
+      //   // res.status(400).json({ message: 'Plant already exit' })
+      //   res.status(400).json({ message: err })
+      //   // res.status(400)
+      // } else {
+      //   res.status(500).json(err)
+      // }
+      res.status(500).json(err)
     }
   }
 }
@@ -111,7 +125,7 @@ async function updateOnePlantById(req, res) {
     const updatedPlant = await PlantSchema.findByIdAndUpdate(
       req.params.id,
       {
-        $set: req.body,
+        $set: req.body
       },
       { new: true }
     )
@@ -143,5 +157,5 @@ export default {
   createNewPlant,
   getOnePlantById,
   updateOnePlantById,
-  deleteOnePlantById,
+  deleteOnePlantById
 }
