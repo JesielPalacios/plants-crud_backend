@@ -54,8 +54,9 @@ const PlantSchema = new mongoose.Schema(
       type: Number,
     },
     plantImage: {
-      ref: 'Photo',
-      type: mongoose.Schema.Types.ObjectId,
+      // ref: 'Photo',
+      // type: mongoose.Schema.Types.ObjectId,
+      type: String
     },
   },
   {

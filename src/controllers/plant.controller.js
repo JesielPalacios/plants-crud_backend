@@ -1,4 +1,6 @@
+import { v4 as uuid } from 'uuid'
 import PlantSchema from '../models/Plant'
+import PhotoSchema from '../models/Photo'
 
 /**
  * Controller for get all the plants from the database, got a sort method too.
@@ -54,28 +56,43 @@ async function createNewPlant(req, res) {
     res.status(400).json({ message: 'Plant already exit' })
   } else {
     try {
-      let newPlant
-      // console.log(newPlant._id.toString().replace('new ObjectId(")').replace('")'))
+      let photoId = uuid()
+
+      let newPlant = req.files
+        ? new PlantSchema({
+            ...req.body,
+            plantImage: photoId
+          })
+        : new PlantSchema({ ...req.body })
 
       if (req.files) {
-        // if (req.files === null) {
-        //   return res.status(400).json({ message: 'No file uploaded' })
-        // }
+        if (req.files === null) {
+          return res.status(400).json({ message: 'No file uploaded' })
+        }
 
         const file = req.files.plantPhoto
 
+        console.log(file.name)
         const newPhoto = new PhotoSchema({
           imagePath: '/uploads/' + file.name.trim(),
-          photoSubject: req.body._id
+          photoSubject: photoId
         })
         const savedPhoto = await newPhoto.save()
+        // newPlant.plantImage = savedPhoto._id.valueOf()
+        // newPlant.plantImage = savedPhoto._id
+        // .valueOf()
+        // .toString()
+        // .replace('new ObjectId("')
+        // .replace('")')
 
-        newPlant = new PlantSchema({
-          ...req.body,
-          plantImage: savedPhoto._id
+        file.mv(`./uploads/${file.name.split(' ').join('')}`, (err) => {
+          if (err) {
+            console.error(err)
+            return res.status(500).send(err)
+          }
+
+          // res.json({ fileName: file.name, filePath: `/uploads/${file.name}` })
         })
-      } else {
-        newPlant = new PlantSchema({ ...req.body })
       }
 
       const savedPlant = await newPlant.save()
