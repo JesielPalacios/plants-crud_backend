@@ -75,7 +75,6 @@ async function createNewPlant(req, res) {
 
         const file = req.files.plantPhoto
 
-        console.log(file.name)
         const newPhoto = new PhotoSchema({
           imagePath: '/uploads/' + file.name.split(' ').join(''),
           photoSubject: newPlant._id.valueOf(),
@@ -162,7 +161,6 @@ async function updateOnePlantById(req, res) {
 
       const file = req.files.plantPhoto
 
-      console.log(file.name)
       const newPhoto = new PhotoSchema({
         imagePath: '/uploads/' + file.name.split(' ').join(''),
         photoSubject: updatedPlant._id.valueOf(),
@@ -211,14 +209,14 @@ async function deleteOnePlantById(req, res) {
       photoSubject: req.params.id
     })
 
-    await console.log('photo', photo)
+    // await console.log('photo', photo)
 
     if (photo) {
       await fs.unlink(path.resolve('.' + photo.imagePath))
     }
     res.status(200).json({ message: 'Plant has been deleted...' })
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     res.status(500).json(err)
   }
 }
